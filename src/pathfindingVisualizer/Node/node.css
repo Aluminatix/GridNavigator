@@ -7,17 +7,17 @@
   }
   
   .node-start {
-    
+   
     background-repeat: no-repeat;
-    background-image: url('C:\Users\Asus\OneDrive\Desktop\Find_Path\path\public\loc.svg');
-    background-position: center; 
+    background-image: url('/loc.svg');
+    background-position: center;
     filter: brightness(60%);
   }
   
   .node-finish {
    
     background-repeat: no-repeat;
-    background-image: url('C:\Users\Asus\OneDrive\Desktop\Find_Path\path\public\house-solid.svg');
+    background-image: url('/house-solid.svg');
     background-position: center;
   }
   

@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faFlagCheckered } from '@fortawesome/free-solid-svg-icons'; // Importing icons
 import "./node.css";
 
 const Node = ({
@@ -52,7 +54,15 @@ const Node = ({
       onMouseEnter={() => onMouseEnter(row, col)}
       onMouseDown={() => onMouseDown(row, col)}
       onMouseUp={() => onMouseUp()}
-    ></div>
+    >
+      {/* {isStart && (
+        <FontAwesomeIcon icon="fa-solid fa-location-dot" style={{color: "#63E6BE",}} />
+      )}
+      {isFinish && (
+        <FontAwesomeIcon icon="fa-solid fa-house" />
+      )} */}
+
+    </div>
   );
 };
 
