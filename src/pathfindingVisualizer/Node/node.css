@@ -7,16 +7,18 @@
   }
   
   .node-start {
-    background-repeat: no-repeat;
+    background-color: rgb(233, 206, 36);
+    /* background-repeat: no-repeat;
     background-image: url('C:\Users\Asus\OneDrive\Desktop\Find_Path\path\src\assets\loc.svg');
-    background-position: center; /* Center the image */
-    filter: brightness(60%);
+    background-position: center; 
+    filter: brightness(60%); */
   }
   
   .node-finish {
-    background-repeat: no-repeat;
+    background-color: rgb(241, 39, 17);
+    /* background-repeat: no-repeat;
     background-image: url('C:\Users\Asus\OneDrive\Desktop\Find_Path\path\src\assets\house-solid.svg');
-    background-position: center; /* Center the image */
+    background-position: center; */
   }
   
   .node-finish-reached {
