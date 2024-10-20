@@ -87,6 +87,9 @@ const NavBar = (props) => {
         case "Generate Random Maze":
           props.generateRandomMaze();
           break;
+        case "Generate Recursive Maze":
+          props.generateRecursiveMaze();
+          break;
         default:
           break;
       }
@@ -188,7 +191,7 @@ const NavBar = (props) => {
                 Mazes
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {["Generate Random Maze"].map((mazeOption) => (
+                {["Generate Random Maze", "Generate Recursive Maze"].map((mazeOption) => (
                   <li key={mazeOption}>
                     <button
                     className="dropdown-item btn-light"

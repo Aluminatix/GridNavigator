@@ -24,6 +24,7 @@ import {
 
 //Maze Algorithms
 import { randomMaze } from "../mazeAlgorithms/randomMaze";
+import { recursiveDivisionMaze } from "../mazeAlgorithms/recursiveMaze";
 
 
 const initialNum = getInitialNum(window.innerWidth, window.innerHeight);
@@ -222,6 +223,18 @@ const PathfindingVisualizer = () => {
     }, mazeSpeed);
     
   };
+  const generateRecursiveMaze = () => {
+    if (visualizingAlgorithm || generatingMaze) return;
+
+    setGeneratingMaze(true);
+    setTimeout(()=>{
+      const startNode = grid[startNodeRow][startNodeCol];
+      const finishNode = grid[finishNodeRow][finishNodeCol];
+      const walls = recursiveDivisionMaze(grid, startNode, finishNode);
+      animateMaze(walls);
+    }, mazeSpeed);
+    
+  };
 
   return (
     <React.Fragment>
@@ -233,6 +246,7 @@ const PathfindingVisualizer = () => {
         visualizeBFS={() => visualizeAlgorithm(breadthFirstSearch, getNodesInShortestPathOrderBFS)}
         visualizeDFS={() => visualizeAlgorithm(depthFirstSearch, getNodesInShortestPathOrderDFS)}
         generateRandomMaze={generateRandomMaze}
+        generateRecursiveMaze={generateRecursiveMaze}
         clearGrid={clearGrid}
         clearPath={clearPath}
         updateSpeed={(pathSpeed, mazeSpeed) => {
