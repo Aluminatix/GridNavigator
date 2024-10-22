@@ -1,3 +1,4 @@
+
 export function astar(grid, startNode, finishNode) {
     if (!startNode || !finishNode || startNode === finishNode) {
       return false;
@@ -14,7 +15,10 @@ export function astar(grid, startNode, finishNode) {
       const closestNode = openSet.extractMin();
   
       if (closestNode.isWall) continue;
-      if (closestNode === finishNode) return visitedNodesInOrder;
+      if (closestNode === finishNode) {
+        // console.log("Reached");
+        return visitedNodesInOrder;
+      }
   
       closestNode.isVisited = true;
       visitedNodesInOrder.push(closestNode);

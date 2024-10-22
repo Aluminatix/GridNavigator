@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Node from "./Node/node";
 import NavBar from "./navbar";
 import "./pathfindingVisualizer.css";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //Pathfinding Algorithms
 import {
   astar,
@@ -38,7 +39,7 @@ const finishNodeRow = startFinishNode[2];
 const finishNodeCol = startFinishNode[3];
 
 const PathfindingVisualizer = () => {
-
+  
   const [grid, setGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState(false);
   const [visualizingAlgorithm, setVisualizingAlgorithm] = useState(false);
@@ -121,13 +122,44 @@ const PathfindingVisualizer = () => {
   setGeneratingMaze(false);
 
   };
+  function toastNodeVisit(success) {
+    if(success)
+    toast.success('Destination Reached!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // transition: Bounce,
+      });
 
+    else{
+      toast.error('Destination not reachable', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+        });
+    }
+  }
   const animateShortestPath = (nodesInShortestPathOrder, visitedNodesInOrder) => {
     
-    if (nodesInShortestPathOrder.length === 1)
+    if (nodesInShortestPathOrder.length === 1){
           setVisualizingAlgorithm(false);
+          toastNodeVisit(false);
+    }
     for (let i = 1; i < nodesInShortestPathOrder.length; i++){
+
       if (i === nodesInShortestPathOrder.length - 1) {
+        toastNodeVisit(true);
         setTimeout(() => {
           let updatedGrid = updateNodesForRender(grid, nodesInShortestPathOrder, visitedNodesInOrder);
           setGrid(updatedGrid);
@@ -137,12 +169,14 @@ const PathfindingVisualizer = () => {
       }
 
       let node = nodesInShortestPathOrder[i];
+      
       setTimeout(() => {
         //shortest path node
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-shortest-path";
       }, i * (3 * speed));
     }
+    
   };
 
   const animateAlgorithm = (visitedNodesInOrder, nodesInShortestPathOrder) => {
@@ -162,6 +196,7 @@ const PathfindingVisualizer = () => {
         let node = visitedNodesInOrder[i];
         if (i === visitedNodesInOrder.length) {
           setTimeout(() => {
+          
           animateShortestPath(nodesInShortestPathOrder, visitedNodesInOrder);
           }, i * speed);
           return;
@@ -176,17 +211,18 @@ const PathfindingVisualizer = () => {
 
   const visualizeAlgorithm = (algorithm, getNodesInShortestPathOrder) => {
     if (visualizingAlgorithm || generatingMaze) return;
-
+    
     setVisualizingAlgorithm(true);
-
+    
     setTimeout(()=>{
+      
       const startNode = grid[startNodeRow][startNodeCol];
       const finishNode = grid[finishNodeRow][finishNodeCol];
       const visitedNodesInOrder = algorithm(grid, startNode, finishNode);
       const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
       animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     }, speed);
-
+    
   };
 
   const animateMaze = (walls) => {
@@ -237,6 +273,7 @@ const PathfindingVisualizer = () => {
   };
 
   return (
+    
     <React.Fragment>
       <NavBar
         visualizingAlgorithm={visualizingAlgorithm}
@@ -273,6 +310,7 @@ const PathfindingVisualizer = () => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </React.Fragment>
   );
 };
